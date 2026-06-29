@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DISAM 帝勝生技｜網站企劃審核報告</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #1a1a1a;
+    --ink-mid: #3d3d3d;
+    --ink-muted: #7a7a7a;
+    --surface: #f8f7f4;
+    --surface-warm: #f2ede6;
+    --line: #e0dbd2;
+    --red: #c94040;
+    --red-bg: #fdf0f0;
+    --red-line: #e8b4b4;
+    --amber: #b06a18;
+    --amber-bg: #fdf6ec;
+    --amber-line: #e8cfa0;
+    --teal: #1a6e5a;
+    --teal-bg: #eef7f4;
+    --teal-line: #a0d4c6;
+    --accent: #2d5c4a;
+    --accent-light: #e8f2ef;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* ── Header ── */
+  .report-header {
+    background: var(--ink);
+    color: #fff;
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 79px,
+      rgba(255,255,255,0.03) 79px,
+      rgba(255,255,255,0.03) 80px
+    );
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .header-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .header-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    margin-bottom: 40px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  .meta-value {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+
+  /* ── Executive summary ── */
+  .exec-bar {
+    background: var(--accent);
+    padding: 28px 48px;
+  }
+  .exec-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+  }
+  .exec-stat {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .exec-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  .exec-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+  }
+  .exec-desc strong {
+    display: block;
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  /* ── Body layout ── */
+  .body-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+
+  /* ── Section intro ── */
+  .section-intro {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-intro p {
+    font-size: 16px;
+    color: var(--ink-mid);
+    line-height: 1.9;
+    max-width: 720px;
+  }
+
+  /* ── Priority legend ── */
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Dimension block ── */
+  .dimension {
+    margin-bottom: 56px;
+  }
+  .dimension-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .dimension-label {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .dimension-tag {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .tag-high { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-line); }
+  .tag-mid  { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-line); }
+  .tag-low  { background: var(--teal-bg); color: var(--teal); border: 1px solid var(--teal-line); }
+
+  /* ── Issue card ── */
+  .issue-card {
+    border-radius: 6px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+  .issue-card.high { border-left: 4px solid var(--red); }
+  .issue-card.mid  { border-left: 4px solid var(--amber); }
+  .issue-card.low  { border-left: 4px solid var(--teal); }
+
+  .issue-head {
+    padding: 18px 24px 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+  }
+  .issue-head:hover { background: var(--surface); }
+
+  .issue-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    flex: 1;
+  }
+  .issue-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .badge-high { background: var(--red-bg); color: var(--red); }
+  .badge-mid  { background: var(--amber-bg); color: var(--amber); }
+  .badge-low  { background: var(--teal-bg); color: var(--teal); }
+
+  .issue-title-wrap {}
+  .issue-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .issue-subtitle {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .chevron {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--ink-muted);
+    transition: transform 0.2s ease;
+  }
+  .issue-card.open .chevron { transform: rotate(180deg); }
+
+  .issue-body {
+    display: none;
+    padding: 0 24px 22px;
+    border-top: 1px solid var(--line);
+  }
+  .issue-card.open .issue-body { display: block; }
+
+  .issue-body-inner {
+    padding-top: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .issue-section-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .issue-detail {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+  }
+  .issue-action {
+    background: var(--surface-warm);
+    border-radius: 4px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+  }
+  .issue-action strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  /* ── Priority matrix ── */
+  .matrix-section {
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--line);
+  }
+  .matrix-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .matrix-desc {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-bottom: 32px;
+  }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .matrix-table thead th {
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 500;
+    padding: 10px 16px;
+    border-bottom: 2px solid var(--line);
+    background: var(--surface-warm);
+  }
+  .matrix-table tbody tr {
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+  }
+  .matrix-table tbody tr:hover { background: var(--surface); }
+  .matrix-table tbody td {
+    padding: 14px 16px;
+    vertical-align: top;
+    line-height: 1.6;
+    color: var(--ink-mid);
+  }
+  .matrix-table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .matrix-table td:nth-child(2) { color: var(--ink-muted); font-size: 13px; }
+
+  .priority-chip {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  /* ── Closing note ── */
+  .closing {
+    margin-top: 64px;
+    padding: 36px 40px;
+    background: var(--ink);
+    border-radius: 8px;
+    color: rgba(255,255,255,0.75);
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .closing strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .report-header { padding: 40px 24px 36px; }
+    .exec-bar { padding: 24px 24px; }
+    .exec-inner { grid-template-columns: 1fr; gap: 20px; }
+    .body-wrap { padding: 40px 24px 60px; }
+    .issue-body-inner { grid-template-columns: 1fr; }
+    .header-title { font-size: 28px; }
+    .header-meta { gap: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chevron { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="report-header">
+  <div class="header-inner">
+    <p class="header-eyebrow">Website Strategy Review · B2B Raw Materials Manufacturer</p>
+    <h1 class="header-title">DISAM 帝勝生技<br>網站企劃審核報告</h1>
+    <p class="header-subtitle">以 B2B 目標使用者視角——品牌採購客戶、國際代理商、研發技術窗口——對企劃書進行全面內容架構審核。</p>
+    <div class="header-meta">
+      <div class="meta-item">
+        <span class="meta-label">審核維度</span>
+        <span class="meta-value">架構 · 內容 · 轉換 · 信任</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">問題總計</span>
+        <span class="meta-value">12 個修正項目</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">審核基準</span>
+        <span class="meta-value">B2B 原料廠官網最佳實踐</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ EXEC SUMMARY BAR ══════════ -->
+<div class="exec-bar">
+  <div class="exec-inner">
+    <div class="exec-stat">
+      <span class="exec-num">4</span>
+      <div class="exec-desc"><strong>高優先問題</strong>嚴重影響 B2B 轉換，開站前必修</div>
+    </div>
+    <div class="exec-stat">
+      <span class="exec-num">5</span>
+      <div class="exec-desc"><strong>中優先問題</strong>影響客戶信任建立，建議同步修正</div>
+    </div>
+    <div class="exec-stat">
+      <span class="exec-num">3</span>
+      <div class="exec-desc"><strong>建議強化項目</strong>提升長期信任度與轉換品質</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BODY ══════════ -->
+<div class="body-wrap">
+
+  <!-- Intro -->
+  <div class="section-intro">
+    <p>整體企劃書在品牌敘事與視覺系統上完成度高，對投資人或媒體呈現非常有說服力。然而，從 B2B 採購決策的功能性需求來看，存在系統性缺口——目前設計邏輯較接近 D2C 品牌官網，需要補強面向採購、研發與代理商的技術信任節點，才能讓網站真正承擔商業轉換的功能。</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span>高優先：開站前必修</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>中優先：建議開站前完成</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--teal)"></span>建議強化：持續優化</div>
+  </div>
+
+
+  <!-- ══ 維度一：架構層 ══ -->
+  <div class="dimension">
+    <div class="dimension-header">
+      <span class="dimension-label">架構層問題</span>
+      <span class="dimension-tag tag-high">高優先</span>
+    </div>
+
+    <!-- Card 1 -->
+    <div class="issue-card high" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-high">必修</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">完全缺少技術規格資料入口</div>
+            <div class="issue-subtitle">研發與採購窗口找不到 TDS / spec sheet / SDS 的存取路徑</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">研發或採購窗口的首要行為是找 TDS（技術數據表）、SDS（安全數據表）或 spec sheet。目前企劃書的 Resources 中只有白皮書與 Product Briefs，但這兩者是「行銷型文件」，並非「技術型文件」。B2B 原料採購流程中，TDS 是決策必備，缺席等於告訴客戶「我們沒有準備好接受大客戶」。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            在 Resources 或 Platform 下新增 <code>/resources/technical-documents</code> 頁面，明確收納各品項的 TDS、COA 樣本、MSDS，並設計「需登入或填表才能下載」的輕度門檻，兼顧資料保護與潛在客戶資訊蒐集。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="issue-card high" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-high">必修</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">生產能力與供應穩定性完全缺席</div>
+            <div class="issue-subtitle">採購方無法評估供應商資格，直接阻斷轉換路徑</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">一個準備評估供應商的品牌採購，在看完技術內容後最想知道的是：你能穩定供多少量？你的工廠在哪裡？認證是什麼等級？企劃書從頭到尾是「平台敘事」，卻沒有任何關於 production capacity、lead time、MOQ（最小起訂量）的資訊入口，也沒有工廠背景呈現，這是 B2B 官網的致命缺口，會讓代理商與大型品牌直接流失。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            在 About 或 Platform 下增加 <code>/about/manufacturing</code>，呈現發酵規模（槽體體積或年產量區間）、設備世代、GMP 等級、工廠所在縣市與認證掃描檔下載。MOQ 與交期可以以「依品項，請洽詢」方式處理，但資訊入口必須存在。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="issue-card high" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-high">必修</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">FAQ 頁面完全缺失</div>
+            <div class="issue-subtitle">B2B 決策前的自助查詢節點未規劃，流失率將偏高</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">B2B 決策週期長，客戶在正式詢問前通常會自行找答案。沒有 FAQ，等於把所有潛在問題都推到 Contact 表單，大幅提高流失率。高頻問題如：是否有 HALAL 認證？最小訂量是多少？是否提供白標？如何申請樣品？這類問題在任何 B2B 原料官網都是必設節點。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            新增 <code>/resources/faq</code>，依使用者類型分欄（採購 / 研發 / 代理商），覆蓋認證、規格、樣品、合作流程、保存條件等核心問題，並在各產品頁底部嵌入該品項相關 FAQ 模組。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="issue-card high" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-high">必修</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">MOQ 與交期資訊無任何入口</div>
+            <div class="issue-subtitle">供應商評估的核心決策資訊完全缺位</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">即使 MOQ 與交期因客戶條件而異，至少應有「一般供應條件說明」頁面或段落。採購在評估供應商時，「能否以合理成本獲得穩定供應」的優先度往往高於技術特色。此資訊缺席會讓訪客無法自助完成初步評估，只能依賴聯繫，增加業務負擔且降低轉換率。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            在 B2B Ingredient Supply 頁或 FAQ 中加入「供應條件說明」段落，說明樣品流程、一般交期區間、包裝規格、是否有試用計畫等，即使不公開精確數字，也應提供架構性說明。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ 維度二：內容層 ══ -->
+  <div class="dimension">
+    <div class="dimension-header">
+      <span class="dimension-label">內容層問題</span>
+      <span class="dimension-tag tag-mid">中優先</span>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="issue-card mid" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-mid">建議修正</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">品牌哲學比重嚴重過重，技術內容不足</div>
+            <div class="issue-subtitle">About 節規劃 4 頁，與 B2B 使用者行為邏輯相反</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">目前 About 節規劃了 Our Story、Philosophy、DISAM Inside、ESG 四個子頁，篇幅與深度明顯大於技術內容，這與 B2B 使用者行為相反——B2B 訪客通常在確認技術能力後，才會去了解品牌故事。目前的排序邏輯偏向 B2C 或投資人敘事，而非採購決策路徑。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            Brand Philosophy 與 DISAM Inside 兩頁可合併為單一頁面，釋出的篇幅移給技術層——例如新增一個「Platform Overview」入口頁，以視覺化方式整合六大模組，作為技術信任的首要落地點。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="issue-card mid" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-mid">建議修正</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">五大產品線頁面完全缺乏數據支撐</div>
+            <div class="issue-subtitle">無活性值、無濃度範圍、無試驗模型，難以支撐採購評估</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">每個應用頁的「解法」區塊都是敘述性文字，沒有任何數據。B2B 原料客戶在評估新供應商時，需要的是：活性物質含量範圍（如 β-glucan ≥ 30%）、建議添加量、試驗模型（in vitro / in vivo）、感官特性（色澤、氣味、溶解性、粒徑）。這些完全不在企劃書中，即使不能全部公開，也應有範圍值。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            每個產品頁增加「原料規格亮點」區塊，至少列出：主要活性成分及濃度區間、建議使用劑量範圍、適用劑型（粉狀 / 液態）、保存條件概述。詳細 TDS 以「登入下載」的方式提供，兼顧保密與資訊需求。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="issue-card mid" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-mid">建議修正</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">ESG 頁認證狀態表達有風險</div>
+            <div class="issue-subtitle">「未來路徑」寫法易被誤讀為認證尚未取得</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">Governance 區塊列出「DMF / 醫材 / USP 等未來路徑」，這個寫法在 B2B 客戶眼中等同於「這些認證我們還沒有」。對於品牌客戶，特別是醫療通路或高階美妝，認證狀態是硬性前提，不是加分項。現有認證與規劃中認證混列，反而可能引發疑慮。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            「現有認證」與「規劃中路徑」明確分欄呈現，並對規劃中項目標示預計取得時程（如 2025 Q4）。現有認證建議提供掃描檔下載連結，提高可信度。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="issue-card mid" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-mid">建議修正</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">IMMIO FOOD® 命名識別衝突風險</div>
+            <div class="issue-subtitle">與 IMMIO® 保健品共用根名，URL 相似，易造成混淆</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">IMMIO® 是保健品原料，IMMIO FOOD® 是食品風味原料。兩者共用「IMMIO」根名，URL 也近似（/applications/immio vs /applications/immio-food）。對國際代理商或初訪者而言，這很容易在搜尋結果、簡報引用或資料夾整理上造成混淆，也可能影響兩個品線的 SEO 獨立性。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            重新評估 IMMIO FOOD® 的命名，建議使用獨立根名（如 IMMFOOD® 或 IMMAVO®），或在所有頁面頂部加入清晰的品牌系列識別標示，確保兩個品線的視覺與語意識別明確區隔。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ 維度三：轉換層 ══ -->
+  <div class="dimension">
+    <div class="dimension-header">
+      <span class="dimension-label">轉換層問題</span>
+      <span class="dimension-tag tag-high">高優先</span>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="issue-card high" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-high">必修</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">固定 CTA 三個且語意高度重疊</div>
+            <div class="issue-subtitle">「合作」訴求重複出現，稀釋行動力，無法區分訪客類型</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">目前規劃三個固定 CTA：Partner with DISAM、Start with DISAM Inside、Request Sample。這三個訊息對應的是同一類型動作（聯繫合作），語意高度重疊，缺乏對訪客身份的差異化引導。B2B 網站的 CTA 設計應依訪客身份和所在頁面情境做動態差異化。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            依訪客行為情境設計差異化 CTA：採購窗口在產品頁 → Request Sample；代理商在 Partnership 頁 → Partner Inquiry；研發窗口在 Platform 頁 → Download TDS。固定 CTA 精簡為一個主要行動，其餘作為次要連結。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 10 -->
+    <div class="issue-card mid" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-mid">建議修正</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">樣品申請表欄位設計不完整</div>
+            <div class="issue-subtitle">缺少關鍵預篩欄位，導致業務接到空殼詢問</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">表單中有「欲申請樣品」欄，但沒有「目標配方規格」、「已有的基底配方類型」或「期望作用訴求」欄。對原料廠來說，這些資訊決定你要推薦哪個品項、哪個規格，缺少這些欄位等於讓業務接到一個空殼詢問，後續還得追問，拉長轉換週期並消耗業務資源。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            樣品申請表新增欄位：目標產品類型（下拉選單）、目標配方中的預期添加比例（範圍選項）、主要訴求功效（多選）、是否已有配方基底（是 / 否 / 開發中）。「預計年用量」欄位改為必填，作為客戶資格初篩依據。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 11 -->
+    <div class="issue-card high" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-high">必修</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">第一階段遺漏 IMMARGO®（動物飼料）</div>
+            <div class="issue-subtitle">動物飼料市場具高成交潛力，遞延上線代價過高</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">企劃書把 IMMARGO® 列為第二階段，但動物飼料添加市場的 B2B 採購週期短、決策標準明確（COA、添加量、成本效益）、競爭紅海程度低於保健品，是 B2B 原料廠優先突破的市場類型。遞延上線代表一段時間內流入動物飼料相關關鍵字的訪客都無法轉換。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            將 IMMARGO® 納入第一階段必做頁面，與 IMMIO®、IMMIRA® 同步上線。IMMIO FOOD® 可替換為第二階段，因食品風味市場的採購週期與決策複雜度更高，延遲影響較小。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ 維度四：信任層 ══ -->
+  <div class="dimension">
+    <div class="dimension-header">
+      <span class="dimension-label">信任層問題</span>
+      <span class="dimension-tag tag-low">建議強化</span>
+    </div>
+
+    <!-- Card 12 -->
+    <div class="issue-card low" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-low">強化建議</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">White Papers 列為第二階段，時機錯誤</div>
+            <div class="issue-subtitle">研發窗口首訪即需技術文件，開站時應有至少一份</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">白皮書被列為第二階段，但研發窗口在第一次訪問時就需要技術文件佐證。如果網站開站時沒有至少一至兩份白皮書，整個 Platform 的「技術深度」主張就缺乏實質支撐，品牌敘事與技術實力之間的落差反而會降低可信度。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            至少準備一份核心白皮書（建議主題：「真菌細胞工廠技術介紹」或「β-glucan 在保健應用的生物活性研究回顧」）作為第一階段必備資源，其餘主題白皮書可列為第二階段持續產出。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 13 -->
+    <div class="issue-card low" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-low">強化建議</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">Case Studies 為空殼規劃，不宜空白上線</div>
+            <div class="issue-subtitle">無具體案例即開站，信任背書等同於零</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">Case Studies 頁面有完整規劃架構，但沒有真實客戶案例可填入時，空殼頁面比沒有這個頁面更傷害可信度——它告訴訪客「我們規劃了但還沒做到」。B2B 訪客對這類訊號非常敏感。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            在無法提供真實客戶案例時，改以「應用情境說明（Application Scenario）」格式呈現：以假設性場景（如「某台灣保健品牌導入 IMMIO® 的產品開發流程」）加上技術數據支撐，說明價值而非宣稱客戶，待有真實案例再替換。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 14 -->
+    <div class="issue-card low" onclick="toggleCard(this)">
+      <div class="issue-head">
+        <div class="issue-left">
+          <span class="issue-badge badge-low">強化建議</span>
+          <div class="issue-title-wrap">
+            <div class="issue-title">缺乏供應商資質展示頁</div>
+            <div class="issue-subtitle">國際代理商評估合作前需要工廠與企業資訊作為背書</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="issue-body">
+        <div class="issue-body-inner">
+          <div>
+            <p class="issue-section-label">問題說明</p>
+            <p class="issue-detail">國際代理商在評估合作前，通常需要確認：公司登記資訊、工廠認證證書（可下載）、品質系統描述、主要客戶類型（可匿名）。目前企劃書沒有這個環節，導致品牌故事講完之後，沒有對應的「可信任佐證」作為落地點，訪客在取得信任感前就離開。</p>
+          </div>
+          <div class="issue-action">
+            <strong>建議行動</strong>
+            在 About 或 Partnership 下建立「Company Profile」頁，收納：公司登記資訊、核心團隊背景（至少列出學歷與專業領域）、主要認證證書掃描檔、工廠照片（發酵設備、實驗室、潔淨室）。即使是早期新創，這頁都能建立超乎預期的專業形象。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ Priority Matrix ══ -->
+  <div class="matrix-section">
+    <h2 class="matrix-title">優先行動矩陣</h2>
+    <p class="matrix-desc">依時間軸與影響力排列，建議依序執行</p>
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th>行動項目</th>
+          <th>對應問題</th>
+          <th>優先級</th>
+          <th>建議時程</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>增加 Technical Documents 入口頁</td>
+          <td>架構層 #1：TDS / spec sheet 缺失</td>
+          <td><span class="priority-chip badge-high">立即</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>增加 Manufacturing / Company Profile 頁</td>
+          <td>架構層 #2：生產能力缺席</td>
+          <td><span class="priority-chip badge-high">立即</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>新增 FAQ 頁面</td>
+          <td>架構層 #3：自助查詢節點缺失</td>
+          <td><span class="priority-chip badge-high">立即</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>IMMARGO® 納入第一階段</td>
+          <td>轉換層 #11：動物飼料市場遞延</td>
+          <td><span class="priority-chip badge-high">立即</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>CTA 差異化設計（依訪客類型）</td>
+          <td>轉換層 #9：CTA 語意重疊</td>
+          <td><span class="priority-chip badge-high">立即</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>各產品線補充規格數據區塊</td>
+          <td>內容層 #6：無數據支撐</td>
+          <td><span class="priority-chip badge-mid">同步</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>ESG 頁認證狀態分欄重寫</td>
+          <td>內容層 #7：認證表達有風險</td>
+          <td><span class="priority-chip badge-mid">同步</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>樣品申請表欄位擴充</td>
+          <td>轉換層 #10：表單欄位不完整</td>
+          <td><span class="priority-chip badge-mid">同步</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>About 節架構精簡（合併 2 頁）</td>
+          <td>內容層 #5：品牌哲學比重過重</td>
+          <td><span class="priority-chip badge-mid">同步</span></td>
+          <td>開站前</td>
+        </tr>
+        <tr>
+          <td>準備第一份核心白皮書</td>
+          <td>信任層 #12：White Papers 時機錯誤</td>
+          <td><span class="priority-chip badge-low">第一階段</span></td>
+          <td>開站後 30 天內</td>
+        </tr>
+        <tr>
+          <td>Case Studies 改為 Application Scenarios</td>
+          <td>信任層 #13：空殼案例頁</td>
+          <td><span class="priority-chip badge-low">第一階段</span></td>
+          <td>開站後 30 天內</td>
+        </tr>
+        <tr>
+          <td>IMMIO FOOD® 命名識別複查</td>
+          <td>內容層 #8：命名衝突</td>
+          <td><span class="priority-chip badge-low">持續優化</span></td>
+          <td>第二階段前</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ══ Closing Note ══ -->
+  <div class="closing">
+    <p><strong>總體評估</strong></p>
+    <p style="margin-top:12px">這份企劃書在品牌敘事層面具備相當完整度，「DISAM Inside」的核心主張清晰有力，視覺系統與語氣規範也非常到位。對於吸引投資人關注與媒體曝光，這份企劃已具備充分條件。</p>
+    <p style="margin-top:12px">然而，<strong>B2B 原料採購決策的核心驅動力是技術信任，而非品牌哲學</strong>。目前企劃的資訊架構在滿足採購窗口的功能性需求上有系統性缺口。建議在保留品牌敘事強度的前提下，補強技術文件入口、生產能力背書與使用者旅程中的自助查詢節點，讓官網同時服務「品牌形象建立」與「商業轉換」兩個目標。</p>
+  </div>
+
+</div>
+
+<script>
+function toggleCard(card) {
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
